@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'data/dummy_news.dart';
+// import 'data/dummy_news.dart';
 import 'widgets/news_card.dart';
 import 'models/news_model.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -304,43 +304,92 @@ class NewsDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('News Details')),
-      body: Padding(
+      appBar: AppBar(
+        title: const Text('News Details'),
+        centerTitle: true,
+      ),
+      body: ListView(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Chip(label: Text(category)),
-            const SizedBox(height: 20),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, height: 1.3),
-            ),
-            const SizedBox(height: 12),
-            Text(date, style: TextStyle(color: Colors.grey.shade600)),
-            const SizedBox(height: 24),
-            Text(summary, style: const TextStyle(fontSize: 18, height: 1.6)),
-            const SizedBox(height: 30),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
-              ),
-              onPressed: () async {
-                final Uri url = Uri.parse(sourceUrl);
+        children: [
+          Chip(label: Text(category)),
 
-                if (await canLaunchUrl(url)) {
-                  await launchUrl(
-                    url,
-                    mode: LaunchMode.externalApplication,
-                  );
-                }
-              },
-              icon: const Icon(Icons.open_in_browser),
-              label: const Text('Open Official Source'),
+          const SizedBox(height: 18),
+
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              height: 1.3,
             ),
-          ],
-        ),
+          ),
+
+          const SizedBox(height: 10),
+
+          Text(
+            date,
+            style: TextStyle(
+              color: Colors.grey.shade600,
+            ),
+          ),
+
+          const SizedBox(height: 24),
+
+          const Text(
+            'AI Summary',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+          Text(
+            summary,
+            style: const TextStyle(
+              fontSize: 17,
+              height: 1.6,
+            ),
+          ),
+
+          const SizedBox(height: 28),
+
+          Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: Colors.orange.shade50,
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: Colors.orange.shade200),
+            ),
+            child: const Text(
+              'Disclaimer: This app is for information only. It does not provide legal or immigration advice. Always verify details from official government sources.',
+              style: TextStyle(height: 1.5),
+            ),
+          ),
+
+          const SizedBox(height: 28),
+
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 14),
+            ),
+            onPressed: () async {
+              final Uri url = Uri.parse(sourceUrl);
+
+              if (await canLaunchUrl(url)) {
+                await launchUrl(
+                  url,
+                  mode: LaunchMode.externalApplication,
+                );
+              }
+            },
+            icon: const Icon(Icons.open_in_browser),
+            label: const Text('Open Official Source'),
+          ),
+        ],
       ),
     );
   }
