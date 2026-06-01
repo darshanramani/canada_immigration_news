@@ -1,4 +1,5 @@
 import os
+import json
 from fastapi import FastAPI
 from pydantic import BaseModel
 from dotenv import load_dotenv
@@ -20,7 +21,16 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 
 # ---------------- FIREBASE ----------------
 
-cred = credentials.Certificate("firebase_key.json")
+
+
+firebase_key_json = os.getenv("FIREBASE_KEY_JSON")
+
+if firebase_key_json:
+    firebase_key_dict = json.loads(firebase_key_json)
+    cred = credentials.Certificate(firebase_key_dict)
+else:
+    cred = credentials.Certificate("firebase_key.json")
+
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
