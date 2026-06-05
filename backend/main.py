@@ -171,8 +171,10 @@ def sync_news():
             """
 
             try:
-                response = model.generate_content(prompt)
-                ai_summary = response.text
+                ai_summary = summary[:500]
+                # response = model.generate_content(prompt)
+                # ai_summary = response.text
+
 
             except Exception as e:
                 ai_summary = f"AI generation failed: {str(e)}"
