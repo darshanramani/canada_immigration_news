@@ -46,7 +46,7 @@ app = FastAPI(
 
 RSS_FEEDS = [
     "https://www.canadavisa.com/news/rss.html",
-    # "https://www.cicnews.com/feed",
+    "https://www.cicnews.com/feed",
 ]
 
 # ---------------- REQUEST MODEL ----------------
@@ -134,7 +134,7 @@ def sync_news():
 
         feed = feedparser.parse(feed_url)
 
-        for entry in feed.entries[:1]:
+        for entry in feed.entries[:10]:
 
             title = entry.get("title", "")
             link = entry.get("link", "")
@@ -186,6 +186,8 @@ def sync_news():
                 "summary": ai_summary,
                 "sourceUrl": link,
                 "isImportant": False,
+                "sourceName": "CanadaVisa" if "canadavisa" in link else "CIC News",
+                "publisher": "Canada Daily",
             }
 
             db.collection("news").add(news_data)
