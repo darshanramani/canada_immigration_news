@@ -1,4 +1,4 @@
-package com.example.canada_immigration_news
+package com.darshanramani.canadadaily
 
 import io.flutter.embedding.android.FlutterActivity
 

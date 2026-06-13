@@ -52,7 +52,7 @@ class CanadaImmigrationApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Canada Immigration Daily',
+      title: 'Canada Daily',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorSchemeSeed: Colors.red,
@@ -133,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const Center(
               child: Text(
-                'Canada Immigration Daily',
+                'Canada Daily',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w600,
@@ -163,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'Daily Canada immigration news, explained in simple words.',
+                    'Daily Canada news, explained in simple words.',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
@@ -291,6 +291,8 @@ class NewsDetailsScreen extends StatelessWidget {
   final String date;
   final String summary;
   final String sourceUrl;
+  final String sourceName;
+  final String publisher;
 
   const NewsDetailsScreen({
     super.key,
@@ -299,6 +301,8 @@ class NewsDetailsScreen extends StatelessWidget {
     required this.date,
     required this.summary,
     required this.sourceUrl,
+    required this.sourceName,
+    required this.publisher,
   });
 
   @override
@@ -330,6 +334,25 @@ class NewsDetailsScreen extends StatelessWidget {
             date,
             style: TextStyle(
               color: Colors.grey.shade600,
+            ),
+          ),
+
+          const SizedBox(height: 8),
+
+          Text(
+            'Source: $sourceName',
+            style: TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+
+          const SizedBox(height: 4),
+
+          Text(
+            'Publisher: $publisher',
+            style: TextStyle(
+              color: Colors.grey,
             ),
           ),
 
@@ -495,8 +518,22 @@ class SavedScreen extends StatelessWidget {
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
+  Future<void> _openUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    const privacyPolicyUrl =
+        'https://github.com/darshanramani/canada_immigration_news/blob/master/PRIVACY_POLICY.md';
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile & Settings'),
@@ -504,35 +541,49 @@ class ProfileScreen extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
-        children: const [
-          Card(
+        children: [
+          const Card(
             child: ListTile(
               leading: Icon(Icons.info_outline),
-              title: Text('About App'),
-              subtitle: Text('Canada immigration updates explained simply.'),
+              title: Text('About Canada Daily'),
+              subtitle: Text(
+                'Canada Daily is a news aggregation app that provides Canadian updates from public news and government-related sources.',
+              ),
+            ),
+          ),
+          const Card(
+            child: ListTile(
+              leading: Icon(Icons.email_outlined),
+              title: Text('Contact Us'),
+              subtitle: Text('Email: ramanidarshan18@gmail.com'),
             ),
           ),
           Card(
+            child: ListTile(
+              leading: const Icon(Icons.privacy_tip_outlined),
+              title: const Text('Privacy Policy'),
+              subtitle: const Text('View our privacy policy'),
+              onTap: () {
+                _openUrl(privacyPolicyUrl);
+              },
+            ),
+          ),
+          const Card(
             child: ListTile(
               leading: Icon(Icons.warning_amber_outlined),
               title: Text('Disclaimer'),
               subtitle: Text(
-                'This app is for information only and does not provide legal or immigration advice.',
+                'This app provides news summaries for information only. Always verify details from the original source.',
               ),
             ),
           ),
-          Card(
+          const Card(
             child: ListTile(
-              leading: Icon(Icons.privacy_tip_outlined),
-              title: Text('Privacy Policy'),
-              subtitle: Text('Privacy policy link will be added before Play Store release.'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              leading: Icon(Icons.email_outlined),
-              title: Text('Contact Support'),
-              subtitle: Text('support@canadaimmigrationdaily.com'),
+              leading: Icon(Icons.newspaper_outlined),
+              title: Text('News Sources'),
+              subtitle: Text(
+                'Articles include source and publisher information where available.',
+              ),
             ),
           ),
         ],

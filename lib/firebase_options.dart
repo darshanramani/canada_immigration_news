@@ -80,7 +80,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCawr2tDyc8FkwGaJ-KMK1h3i-kfYVB0FE',
-    appId: '1:18123541633:android:05d6dcded6f75858949180',
+    appId: '1:18123541633:android:64d5ee41ea7e07c2949180',
     messagingSenderId: '18123541633',
     projectId: 'canada-immigration-daily',
     storageBucket: 'canada-immigration-daily.firebasestorage.app',

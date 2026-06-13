@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:18123541633:android:64d5ee41ea7e07c2949180",
+        "android_client_info": {
+          "package_name": "com.darshanramani.canadadaily"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCawr2tDyc8FkwGaJ-KMK1h3i-kfYVB0FE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:18123541633:android:05d6dcded6f75858949180",
         "android_client_info": {
           "package_name": "com.example.canada_immigration_news"

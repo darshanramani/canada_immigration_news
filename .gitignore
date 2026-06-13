@@ -1,5 +1,7 @@
 backend/firebase_key.json
 backend/.env
+android/key.properties
+android/app/upload-keystore.jks
 
 # Miscellaneous
 *.class

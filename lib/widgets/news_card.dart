@@ -84,9 +84,19 @@ class NewsCard extends StatelessWidget {
                 const SizedBox(height: 8),
 
                 Text(
-                  news.date,
+                  'Published: ${news.date}',
                   style: TextStyle(
                     color: Colors.grey.shade600,
+                  ),
+                ),
+
+                const SizedBox(height: 6),
+
+                Text(
+                  'Source: ${news.sourceName} • Publisher: ${news.publisher}',
+                  style: TextStyle(
+                    color: Colors.grey.shade700,
+                    fontSize: 13,
                   ),
                 ),
 
@@ -119,6 +129,8 @@ class NewsCard extends StatelessWidget {
                             date: news.date,
                             summary: news.summary,
                             sourceUrl: news.sourceUrl,
+                            sourceName: news.sourceName,
+                            publisher: news.publisher,
                           ),
                         ),
                       );
